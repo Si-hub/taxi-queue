@@ -10,18 +10,45 @@
 
     <!--link css files-->
     <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/js/8.0.1/anychart-pie.min.js"></script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['almost full',     11],
+          ['pending',      1],
+        ]);
+
+        var options = {
+          title: 'No of passengers left'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      }
+    </script>
 </head>
 
 <body>
     <div class="container">
         <h1><span>Passengers</span> details!</h1>
         <br />
+        <input type="text" size="5" maxlength="5" value="10:45" id="timeCount">
         <div class="row">
-            <label for="username" class="passengerName"> Name:</label> 
+            <label for="username" class="passengerName">Passenger name:</label> 
             <input type="text" id="name" name="name">
             <br />
             <br />
-            <label for="destination" class="label-2">Start destination:</label>
+            <label for="destination" class="label-2">Starting destination:</label>
             <select name="location" id="location-select">
                 <!-- <option value="">----choose an option----</option> -->
                 <option value="Cape Town">Cape Town</option>
@@ -34,7 +61,7 @@
             <br />
             <br/>
 
-            <label for="destination" class="label-2">End destination:</label>
+            <label for="destination" class="label-2">Ending destination:</label>
             <select name="passenger" id="passenger-select">
                 <!-- <option value="">----choose an option----</option> -->
                 <option value="Cape Town">Cape Town</option>
@@ -47,11 +74,11 @@
 
             <p>Depart Time: <span id="time"></span></p>
             <p>Arrival Time: <span id="time"></span></p>
-            <p class="pricecount">Price:</p>
-            <!-- <script>
-                var currentTime = new Date().toLocaleTimeString()
-            </script> -->
+            <p class="pricecount">Price:</p> <div class="myButton"><button>Submit</button></div>
+            <br/>
         </div>
+        <div id="piechart" style="width: 100%; height: 100%;"></div>
+
     </div>
 </body>
 
